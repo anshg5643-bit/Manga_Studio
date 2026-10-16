@@ -19,8 +19,12 @@ def read_keys(path=os.path.join(ROOT, "api_keys.txt")):
                 keys[k.strip()] = v.strip().strip('"').strip("'")
     return keys
 
-
 KEYS = read_keys()
+
+# Allow Railway environment variables to override local configuration
+for key in ("GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "FLASK_SECRET_KEY", "HF_TOKEN"):
+    if os.environ.get(key):
+        KEYS[key] = os.environ[key]
 if KEYS.get("HF_TOKEN"):
     os.environ["HF_TOKEN"] = KEYS["HF_TOKEN"]
 

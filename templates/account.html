@@ -1,0 +1,18 @@
+{% extends "app_base.html" %}
+{% block app %}
+<div class="grid2">
+  <div class="card stack" style="gap:14px"><h2>Profile</h2>
+    <label class="f">Name<input id="name"></label><label class="f">Email<input id="email" disabled></label>
+    <label class="chk"><span class="sw"><input type="checkbox" id="mk"></span><span>Email me about new features</span></label>
+    <div class="row"><button class="btn lime" id="saveP">Save profile</button><span class="muted small" id="pMsg"></span></div></div>
+  <div class="card stack" style="gap:14px"><h2 id="pwTitle">Password</h2>
+    <label class="f" id="curRow">Current password<input type="password" id="cur" autocomplete="current-password"></label>
+    <label class="f">New password<input type="password" id="new" autocomplete="new-password" placeholder="At least 8 characters"></label>
+    <p class="err" id="pwErr" hidden></p><div class="row"><button class="btn" id="savePw">Change password</button><span class="muted small" id="pwMsg"></span></div></div>
+  <div class="card stack" style="gap:12px"><h2>Your data</h2><p class="muted small" style="margin:0">Everything lives in this machine's <code>instance/</code> folder.</p>
+    <div class="row"><a class="btn" href="/api/export">Export all analyses (JSONL)</a><a class="btn ghost" href="/history">Open history</a></div></div>
+  <div class="card stack" style="gap:12px;border-color:#ff7a8a44"><h2>Delete account</h2><p class="muted small" style="margin:0">Removes your account, saved analyses, uploaded pages and settings. This cannot be undone.</p>
+    <div class="row"><button class="btn danger" id="delAcc">Delete my account</button></div></div>
+</div>
+{% endblock %}
+{% block script %}<script src="/static/account.js"></script>{% endblock %}

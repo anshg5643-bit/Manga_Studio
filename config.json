@@ -1,0 +1,9 @@
+{
+  "backend": "classic",
+  "keep_threshold": 0.5,
+  "rtl": true,
+  "alpha": 1.0,
+  "use_panels": true,
+  "speaker_mode": "alternate",
+  "speaker_thr": 0.35
+}

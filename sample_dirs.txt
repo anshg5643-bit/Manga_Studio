@@ -1,0 +1,4 @@
+# One folder per line. Each folder contains sequence sub-folders (seq_xxx/01.png 02.png 03.png).
+# They appear in the website's "Load a sample sequence" menu. Relative paths are relative to this file.
+../data/drive-download-20261011T122148Z-1-001
+../data/drive-download-20261011T122436Z-1-001

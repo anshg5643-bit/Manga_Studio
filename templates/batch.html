@@ -1,0 +1,31 @@
+{% extends "app_base.html" %}
+{% block app %}
+<div class="stack">
+  <div class="card">
+    <h2>Analyze 15 manga sequences</h2>
+    <p class="muted small">Upload a ZIP containing 15 folders, each with three page images. The result downloads as JSONL: exactly one JSON object per sequence (15 lines).</p>
+    <div class="row">
+      <label class="f" style="min-width:280px">Upload ZIP of 15 sequences<input type="file" id="zipFile" accept=".zip,application/zip"></label>
+      <label class="f" style="min-width:240px">Or use a local dataset folder<select id="grp"></select></label>
+      <label class="f" style="min-width:260px">Official id list (optional)<input type="file" id="ids" accept=".jsonl,.json"></label>
+      <label class="f" style="width:130px">Limit<input type="number" id="limit" min="1" placeholder="all" style="padding:11px 12px"></label>
+      <label class="f" style="min-width:190px">Speaker labels<select id="spk"><option value="">My default</option><option value="alternate">Take turns</option><option value="appearance">Group by nearby art</option><option value="single">One speaker</option></select></label>
+      <span class="spacer"></span><button class="btn lime" id="start">Start batch <span aria-hidden="true">→</span></button>
+    </div>
+    <p class="muted small" style="margin:10px 0 0">Each sequence folder should contain at least three images (PNG/JPG/JPEG/WEBP/BMP). Optional ID list works when its sequence IDs match the folder names. No labels are used.</p>
+    <p class="err" id="err" hidden></p>
+  </div>
+
+  <div class="card" id="prog" hidden>
+    <div class="row" style="justify-content:space-between"><h2 id="pTitle">Running…</h2><span class="tag" id="pCount">0 / 0</span></div>
+    <div class="bar" style="height:14px;margin:8px 0 16px"><i id="pBar" style="width:0%"></i></div>
+    <div class="grid3" id="pStats" hidden>
+      <div class="metric"><b id="sLines">0</b><span>lines extracted</span></div><div class="metric"><b id="sEmpty">0</b><span>empty pages</span></div><div class="metric"><b id="sSecs">0s</b><span>total time</span></div>
+    </div>
+    <div id="check" style="margin-top:14px"></div>
+    <div class="row" style="margin-top:14px"><a class="btn lime" id="dl" href="#" hidden>Download manga_predictions.jsonl</a></div>
+    <div style="overflow:auto;max-height:380px;margin-top:16px"><table><thead><tr><th>Sequence</th><th>Page 1</th><th>Page 2</th><th>Page 3</th><th>Seconds</th></tr></thead><tbody id="tb"></tbody></table></div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}<script src="/static/batch.js"></script>{% endblock %}

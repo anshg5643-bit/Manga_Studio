@@ -1,0 +1,42 @@
+<svg class="robot" viewBox="0 0 520 600" role="img" aria-label="Illustration of a friendly robot reader with a glowing visor and a speech balloon on its chest">
+  <defs>
+    <radialGradient id="rg-glow" cx="50%" cy="38%" r="60%"><stop offset="0" stop-color="#c9f31d" stop-opacity=".28"/><stop offset="1" stop-color="#c9f31d" stop-opacity="0"/></radialGradient>
+    <linearGradient id="rg-helm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a3f46"/><stop offset=".45" stop-color="#14171b"/><stop offset="1" stop-color="#050607"/></linearGradient>
+    <linearGradient id="rg-arm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f6f2"/><stop offset=".6" stop-color="#c7ccc6"/><stop offset="1" stop-color="#8d938d"/></linearGradient>
+    <linearGradient id="rg-chest" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22262b"/><stop offset="1" stop-color="#0a0b0d"/></linearGradient>
+    <filter id="rg-bloom" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <ellipse cx="260" cy="250" rx="250" ry="260" fill="url(#rg-glow)"/>
+  <!-- shoulders / armor -->
+  <path d="M20 600 C 24 470 70 392 168 366 L 352 366 C 450 392 496 470 500 600Z" fill="url(#rg-arm)"/>
+  <path d="M20 600 C 24 470 70 392 168 366 L 190 366 C 120 400 92 480 96 600Z" fill="#000" opacity=".14"/>
+  <path d="M500 600 C 496 470 450 392 352 366 L 330 366 C 400 400 428 480 424 600Z" fill="#fff" opacity=".2"/>
+  <circle cx="86" cy="436" r="22" fill="#14171b"/><circle cx="86" cy="436" r="9" fill="#2c3036"/>
+  <circle cx="434" cy="436" r="22" fill="#14171b"/><circle cx="434" cy="436" r="9" fill="#2c3036"/>
+  <!-- chest plate -->
+  <path d="M150 600 L 168 392 Q 260 360 352 392 L 370 600Z" fill="url(#rg-chest)" stroke="#2c3036" stroke-width="2"/>
+  <path d="M196 600 L 204 470M324 600 L 316 470" stroke="#c9f31d" stroke-width="3" stroke-linecap="round" opacity=".75" filter="url(#rg-bloom)" class="glowline"/>
+  <!-- speech balloon core -->
+  <g class="core" filter="url(#rg-bloom)">
+    <ellipse cx="260" cy="488" rx="38" ry="28" fill="#c9f31d"/>
+    <path d="M238 508 L 226 530 L 254 514Z" fill="#c9f31d"/>
+    <circle cx="246" cy="488" r="4" fill="#0b0c0a"/><circle cx="260" cy="488" r="4" fill="#0b0c0a"/><circle cx="274" cy="488" r="4" fill="#0b0c0a"/>
+  </g>
+  <!-- neck -->
+  <path d="M214 330 L 306 330 L 322 380 Q 260 404 198 380Z" fill="#0d0f12" stroke="#2c3036" stroke-width="2"/>
+  <path d="M214 346 H306M210 362 H310" stroke="#2c3036" stroke-width="3"/>
+  <!-- helmet -->
+  <path d="M140 210 C 140 96 196 40 260 40 C 324 40 380 96 380 210 C 380 280 344 338 260 346 C 176 338 140 280 140 210Z" fill="url(#rg-helm)" stroke="#2c3036" stroke-width="3"/>
+  <path d="M150 190 C 156 110 200 62 260 58 C 230 80 206 130 204 196Z" fill="#fff" opacity=".1"/>
+  <path d="M260 40 V 108" stroke="#2c3036" stroke-width="3"/><path d="M196 62 Q 260 90 324 62" stroke="#2c3036" stroke-width="3" fill="none"/>
+  <!-- visor -->
+  <path d="M172 190 Q 260 164 348 190 L 340 244 Q 260 266 180 244Z" fill="#050607" stroke="#2c3036" stroke-width="3"/>
+  <g class="glowline" filter="url(#rg-bloom)" stroke="#c9f31d" stroke-linecap="round" fill="none">
+    <path d="M192 212 Q 260 194 328 212" stroke-width="7"/>
+    <path d="M214 232 Q 260 224 306 232" stroke-width="4" opacity=".7"/>
+  </g>
+  <circle cx="226" cy="214" r="7" fill="#c9f31d" class="eye"/><circle cx="294" cy="214" r="7" fill="#c9f31d" class="eye"/>
+  <!-- jaw lines -->
+  <path d="M206 290 Q 260 322 314 290" stroke="#c9f31d" stroke-width="3" fill="none" stroke-linecap="round" opacity=".6" class="glowline" filter="url(#rg-bloom)"/>
+  <path d="M168 150 L 148 134M352 150 L 372 134" stroke="#3a3f46" stroke-width="6" stroke-linecap="round"/>
+</svg>

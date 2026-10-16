@@ -1,0 +1,26 @@
+{% extends "app_base.html" %}
+{% block app %}
+<div class="stack">
+  <div class="card">
+    <h2>Score predictions</h2>
+    <p class="muted small">Uses the project's <b>local proxy scorer</b>, not the official <code>score.py</code>. Good for comparing experiments with each other. Confirm with the official scorer before you trust a number.</p>
+    <div class="row">
+      <label class="f" style="min-width:260px">labels.jsonl (required)<input type="file" id="labels" accept=".jsonl,.json"></label>
+      <label class="f" style="min-width:260px">predictions.jsonl<input type="file" id="preds" accept=".jsonl,.json"></label>
+      <span class="spacer"></span><button class="btn lime" id="run">Score <span aria-hidden="true">→</span></button>
+    </div>
+    <p class="muted small" style="margin:10px 0 0">Leave predictions empty to score your saved analyses of sample sequences, matched by sequence id.</p>
+    <p class="err" id="err" hidden></p>
+  </div>
+  <div id="out" class="stack" hidden>
+    <div class="grid3" style="grid-template-columns:repeat(4,minmax(0,1fr))" id="metrics"></div>
+    <div class="card"><div class="row" style="justify-content:space-between"><h2>Per sequence</h2><span class="muted small" id="skipped"></span></div>
+      <div style="overflow:auto;max-height:440px"><table><thead><tr><th data-s="id">Sequence</th><th data-s="text_order_score">Text/order</th><th data-s="balanced_joint_f1">Joint F1</th><th data-s="text_f1">Text F1</th><th data-s="n_pred">Pred</th><th data-s="n_ref">Ref</th></tr></thead><tbody id="rows"></tbody></table></div>
+      <p class="muted small" style="margin:8px 0 0">Click a column to sort, a row to inspect it.</p></div>
+    <div class="card" id="inspect" hidden><div class="row" style="justify-content:space-between"><h2 id="inTitle"></h2><div class="seg" id="inTabs"><button data-p="0">Page 1</button><button data-p="1">Page 2</button><button data-p="2">Page 3</button></div></div>
+      <p class="muted small">Green outline = matched to a reference line. Red = prediction with no match (invented) or reference line you missed.</p>
+      <div class="cmp"><div class="cmpcol"><h4>Prediction</h4><div id="cPred"></div></div><div class="cmpcol"><h4>Reference</h4><div id="cRef"></div></div></div></div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}<script src="/static/evaluate.js"></script>{% endblock %}

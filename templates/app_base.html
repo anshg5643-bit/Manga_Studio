@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} · Fukidashi{% endblock %}
+{% block body %}
+<div class="shell">
+  <aside class="rail" aria-label="Tools">
+    {% for f in FEATURES %}<a href="/{{ f.slug }}" data-tip="{{ f.title }}" class="{{ 'on' if page==f.slug }}" aria-label="{{ f.title }}"><svg><use href="#i-{{ f.slug }}"/></svg></a>{% endfor %}
+    <span class="sp-fill"></span>
+    <a href="/account" data-tip="Account" class="{{ 'on' if page=='account' }}" aria-label="Account"><svg><use href="#i-account"/></svg></a>
+  </aside>
+  <main class="app {{ '' if user else 'locked' }}" id="main">
+    <div class="page-head">
+      <div><h1>{{ title }}</h1><p>{{ sub }}</p></div>
+      <div class="row" id="headActions">{% block actions %}{% endblock %}</div>
+    </div>
+    <div class="lock card" id="lock"><h2>Sign in to use {{ title }}</h2><p class="muted">Create a free account. Everything runs on this machine.</p><button class="btn lime" data-portal="signup">Create account</button></div>
+    <div class="tool">{% block app %}{% endblock %}</div>
+  </main>
+</div>
+<div class="lightbox" id="lightbox"><img alt=""></div>
+{% endblock %}

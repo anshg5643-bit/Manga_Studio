@@ -1,0 +1,26 @@
+{% extends "app_base.html" %}
+{% block actions %}<label class="f" style="min-width:260px">Analysis<select id="pick"></select></label><a class="btn sm" id="openIn" href="/analyzer">Open in Analyzer</a>{% endblock %}
+{% block app %}
+<div class="stack">
+  <div class="card" id="empty" hidden><h2>Nothing to order yet</h2><p class="muted">Read three pages in the <a class="link" href="/analyzer">Analyzer</a> first.</p></div>
+  <div id="main2" class="stack" hidden>
+    <div class="card">
+      <div class="row">
+        <div><div class="muted small" style="margin-bottom:6px">Direction</div><div class="seg" id="dir"><button data-v="1" aria-selected="true">Right to left</button><button data-v="0" aria-selected="false">Left to right</button></div></div>
+        <label class="f" style="min-width:240px">Vertical weight <span id="alV" style="color:var(--lime)">1.0</span><input type="range" id="alpha" min="0" max="4" step="0.1" value="1"></label>
+        <label class="chk" style="padding-bottom:12px"><span class="sw"><input type="checkbox" id="pan" checked></span><span>Cut into tiers and columns</span></label>
+        <span class="spacer"></span>
+        <button class="btn" id="prev">Preview order</button><button class="btn lime" id="apply" disabled>Apply to analysis</button>
+      </div>
+      <p class="muted small" id="msg" style="margin:10px 0 0">Vertical weight decides how strongly "higher on the page" beats "further right" when no clean cut exists. Preview does not change your saved result.</p>
+    </div>
+    <div class="row"><div class="seg" id="tabs"><button data-p="0">Page 1</button><button data-p="1">Page 2</button><button data-p="2">Page 3</button></div><span class="spacer"></span>
+      <label class="chk"><span class="sw"><input type="checkbox" id="showPath" checked></span><span>Show reading path</span></label><span class="tag" id="saveState">Saved</span></div>
+    <div class="split">
+      <div class="shot"><div class="shotwrap" id="shotwrap" style="cursor:default"><img id="ov" alt="Page with reading order"><svg class="pathsvg" id="path" preserveAspectRatio="none"></svg></div></div>
+      <div><p class="muted small" id="modeNote" style="margin-top:0"></p><div class="linelist" id="lines"></div></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}<script src="/static/order.js"></script>{% endblock %}

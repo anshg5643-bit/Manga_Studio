@@ -1,0 +1,19 @@
+{% extends "app_base.html" %}
+{% block actions %}<a class="btn sm lime" href="/analyzer">New analysis</a>{% endblock %}
+{% block app %}
+<div class="dash" id="dash">
+  <div class="card"><h3 class="muted" style="font-weight:500">Recent sequences</h3><div class="members" id="recent"></div></div>
+  <div class="card"><h3 class="muted" style="font-weight:500">Analyses, last 14 days</h3><svg class="chart" id="line" viewBox="0 0 300 150" preserveAspectRatio="none"></svg><div class="stat" id="nAn">0<small>total</small></div></div>
+  <div class="card"><h3 class="muted" style="font-weight:500">Lines per page (average)</h3><div class="hbar" id="perPage"></div></div>
+
+  <div class="card"><h3 class="muted" style="font-weight:500">Latest activity</h3><div class="stackcards" id="stackc"></div></div>
+  <div class="card"><h3 class="muted" style="font-weight:500">Top words</h3><div class="stat" id="nLines">0<small>lines extracted</small></div><div class="row" style="gap:8px;margin-top:16px" id="words"></div></div>
+  <div class="card"><h3 class="muted" style="font-weight:500">Daily activity</h3><div class="cols" id="cols"></div><div class="stat" id="nEdit">0<small>edited by hand</small></div></div>
+
+  <div class="card"><h3 class="muted" style="font-weight:500">Speakers</h3><div class="hbar" id="spk"></div></div>
+  <div class="card"><h3 class="muted" style="font-weight:500">Confidence of kept lines</h3><div class="cols" id="conf" style="height:130px"></div><div class="row" style="justify-content:space-between;margin-top:6px" class="muted small"><span class="muted small">0%</span><span class="muted small">100%</span></div><div class="stat" id="avgConf">0%<small>average</small></div></div>
+  <div class="card"><h3 class="muted" style="font-weight:500">System</h3><div class="grid2" style="margin-top:14px;gap:14px" id="sys"></div></div>
+</div>
+<div class="card" id="empty" hidden style="margin-top:18px"><h2>No data yet</h2><p class="muted">Charts fill in as you read sequences in the <a class="link" href="/analyzer">Analyzer</a>.</p></div>
+{% endblock %}
+{% block script %}<script src="/static/dashboard.js"></script>{% endblock %}

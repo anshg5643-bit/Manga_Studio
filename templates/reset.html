@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Reset password · Fukidashi{% endblock %}
+{% block body %}
+<main id="main" class="authwrap">
+  <div class="authcard" style="width:min(560px,100%)">
+    <a class="brand" href="/"><span class="mark" aria-hidden="true"></span>Fukidashi</a>
+    <h1>Reset your password</h1>
+    <p class="muted">This prototype runs on your own machine and does not send email, so resetting is done from the terminal where the server lives:</p>
+    <pre style="background:#0c0e10;border:1px solid var(--line);border-radius:12px;padding:14px;overflow:auto;margin:0"><code style="border:0;background:none">python manage.py reset-password you@example.com NewPassword123</code></pre>
+    <p class="muted small">Then <a class="link" href="/login">sign in</a> with the new password. Signed up with Google? Use the Google button instead, no password needed. Forgot which accounts exist? <code>python manage.py list</code></p>
+  </div>
+</main>
+{% endblock %}

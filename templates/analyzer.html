@@ -1,0 +1,53 @@
+{% extends "app_base.html" %}
+{% block actions %}
+<div class="menu-pop" id="exportMenu" hidden><button class="btn sm" data-toggle>Export ▾</button><div class="pop"></div></div>
+<button class="btn sm ghost" id="copyBtn" hidden>Copy JSON</button>
+{% endblock %}
+{% block app %}
+<div class="stack">
+  <form id="form" class="card" novalidate>
+    <div class="slots">
+      {% for i in (1,2,3) %}<label class="slot" data-i="{{ i }}"><input type="file" accept="image/*" name="page{{ i }}"><span class="slot-body"><span class="slot-title">Page {{ i }}</span><span class="slot-hint">Drop or choose an image</span></span><img alt="" hidden></label>{% endfor %}
+    </div>
+    <p class="muted small" style="margin:10px 2px 0">Tip: drop all three files on any slot at once. They are placed in filename order.</p>
+    <div class="row" style="margin-top:16px">
+      <label class="f" style="min-width:190px">Speaker labels<select id="optSpk"><option value="alternate">Take turns</option><option value="appearance">Group by nearby art</option><option value="single">One speaker</option></select></label>
+      <label class="f" style="min-width:190px">Reading direction<select id="optRtl"><option value="1">Right to left (manga)</option><option value="0">Left to right</option></select></label>
+      <label class="f" style="min-width:210px">Keep threshold <span id="thrVal" style="color:var(--lime)">0.50</span><input type="range" id="optThr" min="0.05" max="0.95" step="0.05" value="0.5"></label>
+      <label class="chk" style="padding-bottom:12px"><span class="sw"><input type="checkbox" id="optPan" checked></span><span>Use panel cuts</span></label>
+      <span class="spacer"></span>
+      <button class="btn lime" type="submit" id="go">Read these pages <span aria-hidden="true">→</span></button>
+    </div>
+    <div class="row" id="sampleWrap" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line)" hidden>
+      <label class="f" style="min-width:220px">Dataset folder<select id="grpSel"></select></label>
+      <label class="f" style="min-width:260px">Sequence<select id="seqSel"></select></label>
+      <button type="button" class="btn sm" id="loadSeq">Read this sequence</button>
+      <button type="button" class="btn sm ghost" id="randSeq">Random</button>
+    </div>
+  </form>
+  <div id="busy" class="busy" role="status" aria-live="polite" hidden><span class="bar"></span><span>Reading pages. About 10 to 20 seconds on a CPU.</span></div>
+  <p id="err" class="err" role="alert" hidden></p>
+
+  <section id="result" hidden>
+    <div class="row" style="margin-bottom:14px">
+      <input id="title" aria-label="Analysis title" style="max-width:340px;font-weight:600">
+      <div class="seg" role="tablist" id="tabs"><button role="tab" data-p="0">Page 1</button><button role="tab" data-p="1">Page 2</button><button role="tab" data-p="2">Page 3</button></div>
+      <span class="spacer"></span>
+      <span class="tag" id="saveState">Saved</span>
+      <label class="chk"><span class="sw"><input type="checkbox" id="showRej" checked></span><span>Show rejected boxes</span></label>
+    </div>
+    <div class="split">
+      <div class="shot"><div class="shotwrap" id="shotwrap" title="Click to enlarge"><img id="ov" alt="Page with detected balloons numbered in reading order"><div class="hl" id="hl" hidden></div></div>
+        <p class="muted small" style="margin:8px 4px 0">Coloured boxes are kept text. Grey boxes were rejected as sound effects, signs or low-confidence reads.</p></div>
+      <div>
+        <div class="row" style="margin-bottom:12px"><div id="legend" class="row" style="gap:8px"></div><span class="spacer"></span><button class="btn sm" id="addLine">+ Add line</button></div>
+        <div class="linelist" id="lines"></div>
+        <p class="muted" id="empty" hidden>No story text found on this page. Add a line, or restore a rejected block below.</p>
+        <div class="rej" id="rejBox" hidden><b class="small">Rejected text. Click one to add it back.</b><div id="rejList"></div></div>
+        <p class="muted small" id="note" style="margin-top:12px"></p>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+{% block script %}<script src="/static/analyzer.js"></script>{% endblock %}

@@ -1,0 +1,6 @@
+# only for the optional Qwen2.5-VL LoRA path (needs an NVIDIA GPU)
+-r requirements.txt
+torch
+transformers>=4.49
+peft
+accelerate

@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block body %}
+<main id="main">
+<section class="hero">
+  <div class="pill-tag"><b>New</b> Open-source models only. No hosted AI APIs.</div>
+  <h1>Everything you need to read manga text, <em class="serif">without the guesswork.</em></h1>
+  <p class="lede">Drop in three consecutive manga pages. Fukidashi finds every speech balloon, reads it, puts the lines in manga reading order and keeps each character's name the same across all three pages.</p>
+  <div class="cta">
+    <a class="btn lime" href="/analyzer">Get started <span aria-hidden="true">→</span></a>
+    <a class="btn ghost" href="/features">Explore features</a>
+  </div>
+  <div class="glow" aria-hidden="true"></div>
+
+  <div class="device" id="stage" aria-label="Animated example of reading order">
+    <div class="device-grid">
+      <div class="floatcard" aria-hidden="true">
+        <h4>Pipeline settings</h4>
+        <div class="muted">Keep threshold</div><div class="mini-range" style="--p:50%">0.50</div>
+        <div class="muted">Order weight</div><div class="mini-range" style="--p:25%">1.0</div>
+        <div class="muted">Direction</div><div class="tag" style="margin-top:6px">Right to left</div>
+      </div>
+      <div class="page">
+        <svg viewBox="0 0 400 560" role="img" aria-label="A manga page with numbered speech balloons showing reading order from right to left">
+          <defs>
+            <pattern id="d1" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><circle cx="2" cy="2" r="1.25" fill="#12141c" opacity=".55"/></pattern>
+            <pattern id="d2" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-15)"><circle cx="2" cy="2" r=".9" fill="#12141c" opacity=".4"/></pattern>
+          </defs>
+          <rect width="400" height="560" fill="#fbfcfe"/>
+          <g stroke="#12141c" stroke-width="3" fill="none"><rect x="16" y="16" width="368" height="214"/><rect x="16" y="246" width="176" height="298"/><rect x="208" y="246" width="176" height="298"/></g>
+          <rect x="19" y="19" width="362" height="208" fill="url(#d1)"/><rect x="19" y="249" width="170" height="292" fill="url(#d2)"/><rect x="211" y="249" width="170" height="292" fill="#e4e8f1"/>
+          <g><ellipse cx="292" cy="92" rx="70" ry="40" fill="#fff" stroke="#12141c" stroke-width="3"/><path d="M262 124 L246 160 L286 130Z" fill="#fff" stroke="#12141c" stroke-width="3" stroke-linejoin="round"/><ellipse cx="292" cy="92" rx="66" ry="36" fill="#fff"/><text x="292" y="88" text-anchor="middle" class="bt">Where are</text><text x="292" y="106" text-anchor="middle" class="bt">you going?</text></g>
+          <g><ellipse cx="110" cy="150" rx="58" ry="32" fill="#fff" stroke="#12141c" stroke-width="3"/><ellipse cx="110" cy="150" rx="54" ry="28" fill="#fff"/><text x="110" y="155" text-anchor="middle" class="bt">Home.</text></g>
+          <g><ellipse cx="300" cy="340" rx="62" ry="34" fill="#fff" stroke="#12141c" stroke-width="3"/><ellipse cx="300" cy="340" rx="58" ry="30" fill="#fff"/><text x="300" y="345" text-anchor="middle" class="bt">Wait for me!</text></g>
+          <g><rect x="40" y="480" width="128" height="36" fill="#fff" stroke="#12141c" stroke-width="3"/><text x="104" y="503" text-anchor="middle" class="bt nar">Later that night</text></g>
+          <g class="badge k1"><circle cx="352" cy="62" r="15" class="c1"/><text x="352" y="68" text-anchor="middle">1</text></g>
+          <g class="badge k2"><circle cx="164" cy="128" r="15" class="c2"/><text x="164" y="134" text-anchor="middle">2</text></g>
+          <g class="badge k3"><circle cx="356" cy="312" r="15" class="c1"/><text x="356" y="318" text-anchor="middle">3</text></g>
+          <g class="badge k4"><circle cx="42" cy="478" r="15" class="c3"/><text x="42" y="484" text-anchor="middle">4</text></g>
+        </svg>
+      </div>
+      <div class="floatcard" aria-hidden="true">
+        <h4>Transcript</h4>
+        <div class="jl j1"><span class="sp" style="background:var(--sp1)">tomato1</span>Where are you going?</div>
+        <div class="jl j2"><span class="sp" style="background:var(--sp2)">tomato2</span>Home.</div>
+        <div class="jl j3"><span class="sp" style="background:var(--sp1)">tomato1</span>Wait for me!</div>
+        <div class="jl j4"><span class="sp" style="background:#9aa0a8">NARRATION</span>Later that night</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="scene" aria-label="Meet the reader">
+  <div class="scene-copy"><p class="kicker">Meet the reader</p><h2>An open-source <em class="serif">reader</em> that never skips a balloon.</h2>
+    <p class="muted">It sees the page, finds the speech, keeps the order and remembers who talked.</p></div>
+  <div class="scene-stage">
+    <div class="scene-robot">{% include "_robot.html" %}</div>
+    <div class="floatcard fc-left" aria-hidden="true">
+      <h4>Pipeline settings</h4>
+      <div class="muted">Keep threshold</div><div class="mini-range" style="--p:50%">0.50</div>
+      <div class="muted">Vertical weight</div><div class="mini-range" style="--p:25%">1.0</div>
+      <div class="muted">Speaker merge</div><div class="mini-range" style="--p:23%">0.35</div>
+    </div>
+    <div class="floatcard fc-right" aria-hidden="true">
+      <h4>Speakers</h4>
+      <div class="jl" style="opacity:1"><span class="sp" style="background:var(--sp1)">char1</span>8 lines</div>
+      <div class="jl" style="opacity:1"><span class="sp" style="background:var(--sp2)">char2</span>6 lines</div>
+      <div class="jl" style="opacity:1"><span class="sp" style="background:#9aa0a8">NARRATION</span>2 lines</div>
+    </div>
+    <div class="floatcard fc-bar">
+      <div class="row" style="gap:8px;margin-bottom:10px"><span class="tag"><b>Pages</b> 3 of 3</span><span class="tag">Right to left</span></div>
+      <div class="row" style="flex-wrap:nowrap"><div class="fake-input">Drop three manga pages…</div><a class="btn lime sm" href="/analyzer">Read pages</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="fh">
+  <h2 id="fh">Eight tools. <em class="serif">Each one a full page.</em></h2>
+  <p class="lede">Every feature has its own workspace with its own controls, not a tab in one crowded screen.</p>
+  <div class="fgrid">
+    {% for f in FEATURES %}
+    <a class="card fcard" href="/{{ f.slug }}">
+      <div class="row" style="justify-content:space-between;align-items:center"><span class="ico"><svg><use href="#i-{{ f.slug }}"/></svg></span><span class="go" aria-hidden="true">↗</span></div>
+      <h3>{{ f.title }}</h3><p>{{ f.desc }}</p>
+      <ul>{% for t in f.tags %}<li>{{ t }}</li>{% endfor %}</ul>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section" aria-labelledby="hh">
+  <h2 id="hh">How a page <em class="serif">gets read.</em></h2>
+  <div class="stepgrid">
+    <div><h3>Find the text</h3><p>An open-source OCR model returns every line of text with its box.</p></div>
+    <div><h3>Group balloons</h3><p>Boxes are painted onto the white areas of the page. Lines sharing one enclosed shape become one balloon.</p></div>
+    <div><h3>Keep story text</h3><p>A small trained classifier drops sound effects, page numbers and signs.</p></div>
+    <div><h3>Order and name</h3><p>Balloons are cut into tiers, read right to left, and speakers keep one name across pages.</p></div>
+  </div>
+</section>
+
+<div class="bigcta"><div class="card lime"><h2>Read your first three pages in under a minute.</h2><a class="btn" style="background:#0b0c0a;color:#fff;border-color:#0b0c0a" href="/analyzer">Open the analyzer <span aria-hidden="true">→</span></a></div></div>
+</main>
+<footer class="foot"><span>Fukidashi · built for the BYTE Applied ML manga task</span><nav><a href="/features">Features</a><a href="/how-it-works">How it works</a><a href="/login">Sign in</a></nav></footer>
+{% endblock %}
+{% block script %}<script>requestAnimationFrame(()=>document.getElementById("stage").classList.add("played"));</script>{% endblock %}

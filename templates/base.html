@@ -1,0 +1,56 @@
+{% from "_auth.html" import gblock, signup_form, login_form %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Fukidashi: read manga pages, line by line{% endblock %}</title>
+<meta name="description" content="Upload three consecutive manga pages. Get the story text in reading order and who said each line.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/theme.css">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+{% block head %}{% endblock %}
+</head>
+<body data-page="{{ page }}">
+{% include "_icons.html" %}
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="/" aria-label="Fukidashi home"><span class="mark" aria-hidden="true"></span>Fukidashi</a>
+  <nav class="pillnav" aria-label="Main">
+    <a href="/" class="{{ 'on' if page=='home' }}">Home</a>
+    <div class="menu" id="featMenu">
+      <button type="button" aria-haspopup="true" aria-expanded="false" id="featBtn" class="{{ 'on' if page in ['features'] }}">Features ▾</button>
+      <div class="menu-panel" role="menu">
+        {% for f in FEATURES %}
+        <a href="/{{ f.slug }}" role="menuitem"><span class="ico"><svg><use href="#i-{{ f.slug }}"/></svg></span><span><b>{{ f.title }}</b><span>{{ f.desc }}</span></span></a>
+        {% endfor %}
+      </div>
+    </div>
+    <a href="/how-it-works" class="{{ 'on' if page=='how' }}">How it works</a>
+    <a href="/dashboard" class="hide-m">Dashboard</a>
+  </nav>
+  <div class="acct" id="acct"></div>
+</header>
+
+{% block body %}{% endblock %}
+
+<!-- Sign-up portal: opens automatically for visitors who are not signed in -->
+<div class="portal" id="portal" hidden>
+  <div class="veil"></div><div class="halftone" aria-hidden="true"></div>
+  <div class="bubble" role="dialog" aria-modal="true" aria-labelledby="pt" tabindex="-1">
+    <button class="x" id="portalClose" aria-label="Close">×</button>
+    <div class="seg ptabs" role="tablist"><button role="tab" id="tabUp" aria-selected="true">Create account</button><button role="tab" id="tabIn" aria-selected="false">Sign in</button></div>
+    <h2 id="pt">Start reading manga text</h2>
+    <p class="muted small" id="psub" style="margin:0 0 14px">Free account. Your pages are processed on this machine.</p>
+    {{ gblock() }}
+    <div data-mode="signup">{{ signup_form() }}</div>
+    <div data-mode="login" hidden>{{ login_form() }}</div>
+  </div>
+</div>
+
+<script>window.__USER__ = {{ user|tojson }};</script>
+<script src="/static/common.js"></script>
+{% block script %}{% endblock %}
+</body>
+</html>

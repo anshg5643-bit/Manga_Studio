@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Sign in' if mode=='login' else 'Sign up' }} · Fukidashi{% endblock %}
+{% block body %}
+<main id="main" class="authwrap">
+  <div class="authcard">
+    <a class="brand" href="/"><span class="mark" aria-hidden="true"></span>Fukidashi</a>
+    <h1>{{ 'Sign In' if mode=='login' else 'Sign Up' }}</h1>
+    {{ gblock() }}
+    {% if mode=='login' %}{{ login_form() }}<p class="foot-note">Not a member yet? <a href="/signup">Sign up now</a></p>
+    {% else %}{{ signup_form() }}<p class="foot-note">Are you member? <a href="/login">Sign in now</a></p>{% endif %}
+  </div>
+</main>
+{% endblock %}

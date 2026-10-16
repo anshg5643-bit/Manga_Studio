@@ -1,0 +1,11 @@
+flask>=3.0
+opencv-python-headless
+numpy
+pillow
+rapidocr-onnxruntime
+scikit-learn
+scipy
+rapidfuzz
+wordninja
+google-auth
+requests

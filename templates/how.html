@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}How it works · Fukidashi{% endblock %}
+{% block body %}
+<main id="main" class="section" style="padding-top:60px">
+  <h1 style="font-size:clamp(38px,6vw,76px);line-height:1;max-width:16ch">How it works, <em class="serif">and what it can't do.</em></h1>
+  <div class="prose">
+    <h2>The pipeline</h2>
+    <p><b>1. OCR.</b> RapidOCR (PaddleOCR PP-OCR weights in ONNX) returns text lines and boxes on the CPU.</p>
+    <p><b>2. Balloons.</b> Line boxes are painted white on a thresholded copy of the page. Connected white regions are balloons. Lines in one region are joined. Lines on the art stay as free blocks.</p>
+    <p><b>3. Keep filter.</b> Twenty geometric and OCR features (balloon shape, position, text size, confidence, local whiteness) feed a gradient-boosted classifier. It decides story text versus sound effects, page numbers and signs. Until you train it on labels, a hand-written rule is used instead.</p>
+    <p><b>4. Cleanup.</b> Merged words are split, digit/letter confusions fixed, ".." becomes "...".</p>
+    <p><b>5. Reading order.</b> An XY-cut on balloon boxes forms tiers (top to bottom) and columns (right to left). When nothing can be cut, a weighted top-right-first score is used.</p>
+    <p><b>6. Speakers.</b> Baselines only: alternating characters, or clustering of a small grey-level descriptor of the art around each balloon. Rectangular tail-less boxes become NARRATION. Fix mistakes on the <a href="/speakers">Speakers</a> page.</p>
+    <h2>Output format</h2>
+    <p>One JSON object per sequence: <code>{"sequence_id": "...", "pages": [[{"speaker":"char1","text":"..."}], [...], [...]]}</code>. Three page lists, lines in reading order, <code>NARRATION</code> only for narrator text.</p>
+    <h2>Known limits</h2>
+    <p>Punctuation-only balloons such as <code>...</code> or <code>?!</code> are often missed by OCR. Speaker labelling is a baseline and will mislabel when one character speaks twice in a row. Narration detection is a shape rule. Always review results in the <a href="/analyzer">Analyzer</a>.</p>
+    <h2 id="terms">Terms and privacy</h2>
+    <p>This is a local prototype. Accounts and analyses are stored in a SQLite file on the machine running the server. Passwords are hashed. Pages you upload are processed locally and never sent to a hosted AI service.</p>
+  </div>
+</main>
+<footer class="foot"><span>Fukidashi</span><nav><a href="/">Home</a><a href="/features">Features</a></nav></footer>
+{% endblock %}

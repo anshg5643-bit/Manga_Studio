@@ -1,0 +1,28 @@
+{% extends "app_base.html" %}
+{% block actions %}<label class="f" style="min-width:260px">Analysis<select id="pick"></select></label><a class="btn sm" id="openIn" href="/analyzer">Open in Analyzer</a>{% endblock %}
+{% block app %}
+<div class="stack" id="body">
+  <div class="card" id="empty" hidden><h2>Nothing to edit yet</h2><p class="muted">Read three pages in the <a class="link" href="/analyzer">Analyzer</a> first.</p></div>
+  <div id="main2" hidden class="stack">
+    <div class="grid3">
+      <div class="card"><div class="metric"><b id="mSp">0</b><span>speakers found</span></div></div>
+      <div class="card"><div class="metric"><b id="mAll">0</b><span>appear on all 3 pages</span></div></div>
+      <div class="card"><div class="metric"><b id="mOnce">0</b><span>appear only once. Suspicious, maybe merge.</span></div></div>
+    </div>
+    <div class="card">
+      <div class="row" style="justify-content:space-between;margin-bottom:8px"><div><h2>Characters</h2><p class="muted small" style="margin:0">Changes apply to every page at once and save automatically.</p></div><span class="tag" id="saveState">Saved</span></div>
+      <div style="overflow:auto"><table><thead><tr><th>Speaker</th><th>Page 1</th><th>Page 2</th><th>Page 3</th><th>Total</th><th>Rename</th><th>Merge into</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+    </div>
+    <div class="grid2">
+      <div class="card"><h2>Swap two speakers</h2><p class="muted small">Useful when the labels came out the wrong way round.</p>
+        <div class="row"><label class="f" style="flex:1">A<select id="swA"></select></label><label class="f" style="flex:1">B<select id="swB"></select></label><button class="btn" id="swBtn">Swap</button></div></div>
+      <div class="card"><h2>Re-label automatically</h2><p class="muted small">Re-runs the speaker step on the stored pages. Preview first. Applying replaces your manual edits.</p>
+        <div class="row"><label class="f" style="flex:1">Method<select id="reMode"><option value="alternate">Take turns</option><option value="appearance">Group by nearby art</option><option value="single">One speaker</option></select></label>
+          <label class="f" style="flex:1">Merge distance <span id="reThrV" style="color:var(--lime)">0.35</span><input type="range" id="reThr" min="0.05" max="1.5" step="0.05" value="0.35"></label></div>
+        <div class="row" style="margin-top:10px"><button class="btn" id="rePrev">Preview</button><button class="btn lime" id="reApply" disabled>Apply</button><span class="muted small" id="reMsg"></span></div></div>
+    </div>
+    <div class="card"><h2>Who speaks when</h2><p class="muted small">One dot per balloon in reading order. Click a dot to give that line to the next speaker in the list.</p><div id="timeline" class="stack" style="gap:14px"></div></div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}<script src="/static/speakers.js"></script>{% endblock %}

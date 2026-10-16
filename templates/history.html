@@ -1,0 +1,11 @@
+{% extends "app_base.html" %}
+{% block actions %}<input id="q" type="search" placeholder="Search by title…" aria-label="Search" style="width:220px"><div class="seg" id="srcF"><button data-v="" aria-selected="true">All</button><button data-v="upload" aria-selected="false">Uploads</button><button data-v="sample" aria-selected="false">Samples</button></div>{% endblock %}
+{% block app %}
+<div class="stack">
+  <div class="row" id="bulk" hidden><span class="tag"><b id="selN">0</b> selected</span><button class="btn sm" id="expSel">Export selected JSONL</button><button class="btn sm danger" id="delSel">Delete selected</button><button class="btn sm ghost" id="clrSel">Clear</button></div>
+  <div class="card" id="empty" hidden><h2>No analyses yet</h2><p class="muted">Every sequence you read is saved here automatically. Start in the <a class="link" href="/analyzer">Analyzer</a>.</p></div>
+  <div class="hgrid" id="grid"></div>
+  <div class="row"><button class="btn sm" id="expAll" hidden>Export everything (task JSONL)</button></div>
+</div>
+{% endblock %}
+{% block script %}<script src="/static/history.js"></script>{% endblock %}

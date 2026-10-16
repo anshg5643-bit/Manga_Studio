@@ -1,25 +1,40 @@
-# BYTE Applied ML – The Manga Task
+# Manga Studio
 
-> **This README is a skeleton. The task says to write it yourself, in your own words – so I only filled in
-> facts about the code. Replace every `TODO` with what *you* did, saw and decided.** (How to run: `RUN_GUIDE.md`.)
+A web-based workspace for manga image analysis, panel editing, and sequence processing.
 
-## 1. Who did what (be specific – this is graded)
-- Code in this repo was **drafted by an AI assistant (Claude)** at your request. TODO: list what *you* wrote,
-  changed, debugged, chose, or ran. TODO: external code/models you used (RapidOCR / PaddleOCR PP-OCR weights,
-  wordninja, scikit-learn, Qwen2.5-VL, Flask, Google Identity Services).
+**Live Demo:** https://mangastudio-production.up.railway.app
 
-## 2. Approach (what the code does – verify you understand each step)
-1. **OCR**: RapidOCR returns text lines + boxes.
-2. **Balloons**: line boxes are painted white on a thresholded page; connected white components = balloons.
-   Lines in the same component are joined. Lines on art stay as "free" blocks.
-3. **Keep filter (the learned part)**: gradient-boosted trees over 20 geometric/OCR features decide
-   story text vs SFX / page numbers / signs. Trained on dev labels with sequence-level GroupKFold.
-   Before training, a hand-written rule is the baseline.
-4. **Text cleanup**: word splitting (`MELIKE` → `ME LIKE`), digit/letter fixes, ellipsis normalisation.
-5. **Reading order**: XY-cut on balloon boxes (tiers top→bottom, columns right→left), fallback score tunable by `alpha`.
-6. **Speakers**: baseline only – alternating char1/char2, or clustering of a tiny grey-level descriptor of nearby art,
-   rectangular tail-less boxes → `NARRATION`.
-7. **Optional**: Qwen2.5-VL-3B + LoRA (`scripts/train_vlm_lora.py`) mapping 3 pages → JSON.
+## Features
+- Manga image analysis and processing
+- Panel and sequence management
+- Editing and reviewing analysis results
+- Batch processing and evaluation tools
+- User authentication with optional Google Sign-In
+
+## Tech Stack
+- Python and Flask
+- HTML, CSS and JavaScript
+- SQLite
+- Railway deployment
+
+## Configuration
+Some features require Google OAuth credentials or model access tokens. Configure these through environment variables or the application's supported configuration files. Never commit API keys or secrets to GitHub.
+
+## External Code and Model References
+- [Flask](https://flask.palletsprojects.com/)
+- [Python](https://docs.python.org/3/)
+- [SQLite](https://www.sqlite.org/docs.html)
+- [Railway](https://docs.railway.com/)
+- [Google Identity Services](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid)
+- [Hugging Face Hub](https://huggingface.co/docs/hub/model-cards) — for model documentation, if applicable.
+
+Any third-party code or pretrained models included in the project should be credited with their original repository, licence, and model details.
+
+## Notes
+Analysis results depend on the input images and the configured processing pipeline. Generated predictions should be validated before being used as final annotations.
+
+## License
+Specify the project licence and comply with the licences of all third-party dependencies and models.
 
 ## 3. State of the results – read before you submit
 - `outputs/test_predictions.jsonl` was produced by the **untrained baseline** (rule filter, no tuning) because the

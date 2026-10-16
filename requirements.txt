@@ -9,3 +9,4 @@ rapidfuzz
 wordninja
 google-auth
 requests
+gunicorn
